@@ -1,0 +1,10 @@
+{
+  "terminal.integrated.profiles.windows": {
+    "VS 2022 Dev Cmd": {
+      "path": "${workspaceFolder}\\windows-setup.bat",
+      "args": [],
+      "icon": "terminal-cmd"
+    }
+  },
+  "terminal.integrated.defaultProfile.windows": "VS 2022 Dev Cmd"
+}
