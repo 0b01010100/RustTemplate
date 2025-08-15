@@ -1,9 +1,18 @@
 @echo off
-REM Prepend CMake to PATH
-set "PATH=C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\IDE\CommonExtensions\Microsoft\CMake\CMake\bin;%PATH%"
+setlocal
 
-REM Launch the Visual Studio Developer Command Prompt
-call "C:\Program Files\Microsoft Visual Studio\2022\Community\Common7\Tools\VsDevCmd.bat"
+REM Find latest Visual Studio installation path
+for /f "usebackq tokens=*" %%i in (`"%ProgramFiles(x86)%\Microsoft Visual Studio\Installer\vswhere.exe" -latest -products * -requires Microsoft.Component.MSBuild -property installationPath`) do (
+    set "VS_PATH=%%i"
+)
 
-REM Keep the terminal open
+if not defined VS_PATH (
+    echo Visual Studio not found.
+    exit /b 1
+)
+
+REM Call its Developer Command Prompt
+call "%VS_PATH%\Common7\Tools\VsDevCmd.bat"
+
+REM Keep terminal open
 cmd
